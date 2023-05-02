@@ -63,10 +63,7 @@ checkAnswer(usersAnswer){
 }
 }
 let questionClass= new Question(`What is your favorite colour`,[`Pink`,`Black`,`Blue`],`Pink`)
-usersAnswer=`Green`
-const isCorrect=questionClass.checkAnswer(usersAnswer)
-console.log(isCorrect)
-console.log({questionClass});
+console.log(questionClass.checkAnswer(`Yellow`))
 
 // 2. Create a Quiz class with the following properties:
 // ● questions(array):An array of Question objects.
@@ -83,21 +80,36 @@ console.log({questionClass});
 //score if the answer is correct.
 
 class Quiz{
-    constructors(question,currentQuestionsIndex,score){
-this.questions=[]
-this.currentQuestionsIndex=0
-this.score=0
+    constructor(){
+     this.questions=[];
+     this.currentQuestionIndex= 0;
+     this.score=0;
     }
-    addQuestion(question){
-        this.questions.push(question)
+     addQuestion(question){
+     this.questions.push(question);
     }
-    nextQuestion(){
-        this.currentQuestionsIndex++
+     nextQuestion(){
+        this.currentQuestionIndex++
     }
-    submitAnswer(usersAnswer){
-const questionCurrently= this.questions[this.currentQuestionsIndex]
-if(this.currentQuestionsIndex.checkAnswer(usersAnswer)){
+     submitAnswer(ans){
+     const questionCurrently= this.questions[this.currentQuestionIndex]
+     if(questionCurrently.checkAnswer(ans)){
+        this.score++
+     }
+    }
 }
-this.score ++
-    }
-}
+const quizes=new Quiz()
+const question1= new Question("What is your friend`s zodiac sign",["Gemini","Aries","Pisces"],"Scorpion")
+const question2=new Question("Where is KICC located",["Nairobi","Bamburi","Kajiado"],"Nairobi")
+const question3= new Question("How many seasons does the originals have",["two","five","three"],"five")
+
+quizes.addQuestion(question1);
+quizes.addQuestion(question2);
+quizes.addQuestion(question3)
+
+quizes.submitAnswer("Aries");
+quizes.nextQuestion();
+quizes.submitAnswer("Nairobi");
+quizes.nextQuestion();
+quizes.submitAnswer("five")
+console.log(quizes.score)
